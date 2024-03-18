@@ -18,7 +18,9 @@ public class LightingManager : MonoBehaviour
     void Start()
     {
         //game starts at '6 am'
-        TimeOfDay = 6;
+        TimeOfDay = 11;
+        //TimeOfDay = 6 ;
+        
         UpdateLighting(TimeOfDay / 24f);
     }
 

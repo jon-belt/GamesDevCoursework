@@ -35,4 +35,9 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+    public void IncreaseDamage(float amount)
+    {
+        damage += amount;
+    }
 }

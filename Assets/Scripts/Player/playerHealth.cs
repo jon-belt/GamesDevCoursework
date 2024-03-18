@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField]
     private float health;
     private float lerpTimer;
     [Header("PlayerHealth Bar")]
