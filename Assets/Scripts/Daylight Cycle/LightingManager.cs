@@ -96,4 +96,9 @@ public class LightingManager : MonoBehaviour
 
         }
     }
+
+    public float GetTimeOfDay()
+    {
+        return TimeOfDay;
+    }
 }
