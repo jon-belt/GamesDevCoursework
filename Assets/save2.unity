@@ -7912,6 +7912,7 @@ MonoBehaviour:
   DirectionalLight: {fileID: 705507994}
   Preset: {fileID: 11400000, guid: 1003764a88ccf5441b43b39ec5c34b9d, type: 2}
   TimeOfDay: 11
+  DayCount: 1
   MinsPerDay: 12
 --- !u!1 &726045618
 GameObject:
@@ -8391,50 +8392,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818816943}
-  - component: {fileID: 818816942}
+  - component: {fileID: 818816944}
   m_Layer: 0
-  m_Name: _GM
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &818816942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818816941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bbb3825a77c3ad48b90bac11019b4cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waves:
-  - name: 1
-    enemy: {fileID: 4441567024072647356, guid: 295a07860c1930a4ab03783669e2838d, type: 3}
-    count: 1
-    rate: 1
-  - name: 2
-    enemy: {fileID: 4441567024072647356, guid: 295a07860c1930a4ab03783669e2838d, type: 3}
-    count: 5
-    rate: 1.5
-  - name: 3
-    enemy: {fileID: 4441567024072647356, guid: 295a07860c1930a4ab03783669e2838d, type: 3}
-    count: 10
-    rate: 2
-  spawnPoints:
-  - {fileID: 1866047348}
-  - {fileID: 699273354}
-  - {fileID: 1006835529}
-  - {fileID: 502859664}
-  - {fileID: 1771249075}
-  - {fileID: 1253830778}
-  - {fileID: 1939494945}
-  lightingManager: {fileID: 705507996}
-  timeBetweenWaves: 5
-  waveCountdown: 0
 --- !u!4 &818816943
 Transform:
   m_ObjectHideFlags: 0
@@ -8457,6 +8422,31 @@ Transform:
   - {fileID: 1939494945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &818816944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818816941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d492e015a4b5343b54ec50baa105e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4441567024072647356, guid: 295a07860c1930a4ab03783669e2838d, type: 3}
+  spawnPoints:
+  - {fileID: 1866047348}
+  - {fileID: 699273354}
+  - {fileID: 1006835529}
+  - {fileID: 502859664}
+  - {fileID: 1771249075}
+  - {fileID: 1253830778}
+  - {fileID: 1939494945}
+  lightingManager: {fileID: 705507996}
+  minSpawnRate: 2
+  maxSpawnRate: 5
+  maxEnemiesPerNight: 10
 --- !u!1 &836680416
 GameObject:
   m_ObjectHideFlags: 0
@@ -9919,12 +9909,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250963927}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 271.04926, y: 30.624239, z: -1750.7631}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 271.04926, y: 30.624239, z: 498.23694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1926143108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1253830778 stripped
 Transform:
@@ -10597,6 +10587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spaceship
       objectReference: {fileID: 0}
+    - target: {fileID: 3368916564331560363, guid: b3c0a61dfe701344d819eb701e83f4b7, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3873156926313782398, guid: b3c0a61dfe701344d819eb701e83f4b7, type: 3}
       propertyPath: m_SelectedEditorRenderState
       value: 2
@@ -10781,6 +10775,10 @@ PrefabInstance:
     - target: {fileID: 5147731067516083933, guid: 971fc498e8dda794db045edcef9c1bbf, type: 3}
       propertyPath: m_Name
       value: Rock_05 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147731067516083933, guid: 971fc498e8dda794db045edcef9c1bbf, type: 3}
+      propertyPath: m_TagString
+      value: Spaceship
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16269,6 +16267,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 749731170}
+  - {fileID: 1250963929}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1939494945 stripped
@@ -22222,7 +22221,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 818816943}
-  - {fileID: 1250963929}
   - {fileID: 705507995}
   - {fileID: 7007867629856040635}
   - {fileID: 836680417}

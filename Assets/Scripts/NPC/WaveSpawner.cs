@@ -3,137 +3,77 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public enum SpawnState{SPAWNING, WAITING, COUNTING};
+    public enum SpawnState { SPAWNING, WAITING };
 
-    [System.Serializable]
-    public class Wave
-    {
-        //all useful fields for each wave of enemies
-        public string name;
-        public Transform enemy;
-        public int count;
-        public float rate;
-    }
-
-    public Wave[] waves;
-    private int nextWave = 0;
-
+    public Transform enemyPrefab; // Single enemy prefab to spawn
     public Transform[] spawnPoints;
     public LightingManager lightingManager;
 
-    public float timeBetweenWaves = 5f;
-    public float waveCountdown;
+    public float minSpawnRate = 2f;
+    public float maxSpawnRate = 5f;
+    private float spawnTimer;
 
-    private float searchCountdown = 1f;
+    public int maxEnemiesPerNight = 10;
+    private int enemiesSpawnedTonight = 0;
 
-    private SpawnState state = SpawnState.COUNTING;
+    private SpawnState state = SpawnState.WAITING;
 
     void Start()
     {
-        waveCountdown = timeBetweenWaves;
-
         if (spawnPoints.Length == 0)
         {
             Debug.LogError("No spawn points set up");
         }
+
+        // Initialize spawnTimer with a random value within the defined range
+        spawnTimer = Random.Range(minSpawnRate, maxSpawnRate);
     }
 
     void Update()
     {   
-        //gets the time of day, as enemies only spawn in the night
         float currentTime = lightingManager.GetTimeOfDay();
-        bool isNight = currentTime >= 18 || currentTime < 4;
+        bool isNight = currentTime >= 18 || currentTime < 6;
 
-        //if the player is between waves, or if it is during the daytime, the state will be 'WAITING'
-        if (isNight && state == SpawnState.WAITING)
+        // Reset for the next night
+        if (!isNight)
         {
-            if(!EnemyIsAlive())
-            {
-                //next wave can start
-                WaveCompleted();
-            }
-            else
-            {
-                return;
-            }
+            state = SpawnState.WAITING;
+            enemiesSpawnedTonight = 0;
         }
 
-        //if its time to start spawning a wave
-        if (isNight && waveCountdown <= 0)
+        // If it's night and we haven't reached the max enemy count
+        else if (isNight && enemiesSpawnedTonight < maxEnemiesPerNight)
         {
-            //if a wave is not already being spawned
-            if (state != SpawnState.SPAWNING)
+            if (state == SpawnState.WAITING)
             {
-                //start spawning
-                StartCoroutine( SpawnWave(waves[nextWave]));
+                state = SpawnState.SPAWNING;
             }
-        }
-        else
-        {
-            waveCountdown -= Time.deltaTime;
+
+            if (state == SpawnState.SPAWNING)
+            {
+                if (spawnTimer <= 0)
+                {
+                    SpawnEnemy(enemyPrefab);
+                    // After spawning, reset the timer with another random value
+                    spawnTimer = Random.Range(minSpawnRate, maxSpawnRate);
+                    enemiesSpawnedTonight++;
+                }
+                else
+                {
+                    spawnTimer -= Time.deltaTime;
+                }
+            }
         }
     }
 
-    void WaveCompleted()
+    void SpawnEnemy(Transform _enemyPrefab)
     {
-        Debug.Log("Wave Completed...");
+        Debug.Log("Spawning Enemy: " + _enemyPrefab.name); // Debugging purposes
 
-        state = SpawnState.COUNTING;            //sets state back to counting
-        waveCountdown = timeBetweenWaves;       //initiates countdown
-
-        if (nextWave + 1 > waves.Length - 1)
+        if (spawnPoints.Length > 0)
         {
-            nextWave = 0;
-            Debug.Log("All Waves Completed");
-
-            //increase user money here
+            Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Instantiate(_enemyPrefab, _sp.position, _sp.rotation);
         }
-        else
-        {
-            nextWave++;
-        }
-    }
-
-    bool EnemyIsAlive()
-    {
-        //instead of checking every frame, check every second.  As I am looping through all game objects, every frame would be incredibly taxing.
-        searchCountdown -= Time.deltaTime;
-        if (searchCountdown <= 0f)
-        {
-            searchCountdown = 1f;
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    IEnumerator SpawnWave(Wave _wave)
-    {
-        Debug.Log("Spawning Wave: " + _wave.name);
-        state = SpawnState.SPAWNING;
-
-        //spawn an enemy for number of enemies in wave, using 'SpawnEnemy'
-        for (int i = 0; i < _wave.count; i++)
-        {
-            SpawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds( 1f/_wave.rate);
-        }
-
-        state = SpawnState.WAITING;
-
-        yield break;
-    }
-
-    void SpawnEnemy (Transform _enemy)
-    {
-        // spawn the enemy
-        Debug.Log("Spawning Enemy: " + _enemy.name);        //debugging purposes
-
-        Transform _sp = spawnPoints[Random.Range (0, spawnPoints.Length)];
-
-        Instantiate(_enemy, _sp.position, _sp.rotation);
     }
 }

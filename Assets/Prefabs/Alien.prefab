@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d28931428c43a741b6f0ba930dd8df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  spaceship: {fileID: 0}
 --- !u!195 &4485424119059741582
 NavMeshAgent:
   m_ObjectHideFlags: 0

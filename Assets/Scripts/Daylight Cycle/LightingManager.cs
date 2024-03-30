@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -11,21 +13,26 @@ public class LightingManager : MonoBehaviour
     //variables
 
     [SerializeField, Range(0, 24)] private float TimeOfDay;
+    [SerializeField] private int DayCount;
     [SerializeField] private float MinsPerDay = 12f;    //amount of real world mins to in game days
                                                         //every real world 12 mins should be an in game 24 hours
     private float lastLogTime = -1;
+    private bool dayPassed = false;
 
     void Start()
     {
         //game starts at '6 am'
         TimeOfDay = 11;
         //TimeOfDay = 6 ;
+        DayCount = 1;
         
         UpdateLighting(TimeOfDay / 24f);
     }
 
     private void Update()
     {
+        CheckDay();
+
         if (Preset == null)
         {
             return;
@@ -97,8 +104,28 @@ public class LightingManager : MonoBehaviour
         }
     }
 
+    private void CheckDay()
+    {
+        // Increment day count just after midnight
+        if (TimeOfDay >= 0.0 && TimeOfDay < 1.0 && !dayPassed) // Assuming TimeOfDay resets to 0 at midnight
+        {
+            DayCount++;
+            dayPassed = true; // Mark that the day has been counted
+            Debug.Log("Starting Day: " + DayCount);
+        }
+        else if (TimeOfDay >= 1.0) // Ensure dayPassed is reset after TimeOfDay has sufficiently advanced
+        {
+            dayPassed = false;
+        }
+    }
+
     public float GetTimeOfDay()
     {
         return TimeOfDay;
+    }
+
+    public float GetDayCount()
+    {
+        return DayCount;
     }
 }
