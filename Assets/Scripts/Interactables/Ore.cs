@@ -29,7 +29,7 @@ public class Ore : MonoBehaviour, IInteractable
         //trigger to destroy ore after durability has been depleted
         if (durability <= 0)
         {
-            DestroyAfterDelay();
+            StartCoroutine(DestroyAfterDelay());
         }
         return actualDurabilityReduced;
     }
