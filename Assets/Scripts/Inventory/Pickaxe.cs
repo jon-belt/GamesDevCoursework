@@ -11,6 +11,8 @@ public class Pickaxe : MonoBehaviour
 
     private void Start()
     {
+
+
         animator = GetComponent<Animator>();
         if (targetOre == null)
         {
@@ -31,6 +33,7 @@ public class Pickaxe : MonoBehaviour
             if (animator != null)
             {
                 animator.SetTrigger("Mine");
+                //play mining audio
                 StartCoroutine(WaitForAnimation(animator, "UsePickaxe"));
             }
             else

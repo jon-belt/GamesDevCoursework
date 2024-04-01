@@ -5,20 +5,31 @@ using UnityEngine;
 public class Ore : MonoBehaviour, IInteractable
 {
     public PlayerBalance balance;
-    public Pickaxe pickaxe;
-    public GameObject pickaxeCheck;
     [SerializeField] public float durability = 10f;
+    public string InteractionPrompt => "Press E to Mine Ore";
 
-    [SerializeField]
-    private GameObject button;
+    void Start()
+    {
+        balance = FindObjectOfType<PlayerBalance>();
+        if(balance == null)
+            Debug.LogError("PlayerBalance not found");
+    }
 
     public void Interact()
     {
-        //if pickaxe in hand, after interacting with
-        if(pickaxe != null && pickaxeCheck.activeInHierarchy && pickaxe.GetComponent<Renderer>().isVisible)
+        //sets pickaxe on interact, this is because the pickaxe script needs to reference the specific ore the player is mining
+        Pickaxe pickaxe = FindObjectOfType<Pickaxe>();
+        
+        if(pickaxe != null)
         {
+            //set current ore as the target
+            pickaxe.targetOre = this; //current gameobject = ore player is looking at
             pickaxe.UsePickaxe();
         }
+        else
+        {
+            Debug.LogError("Pickaxe not found");
+        }        
     }
 
     public float ReduceDurability(float strength)

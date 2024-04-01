@@ -1,30 +1,42 @@
 using UnityEngine;
+using TMPro;
 
 interface IInteractable
 {
     public void Interact();
+    string InteractionPrompt { get; }
 }
 
 public class Interactor : MonoBehaviour
 {
     public Transform InteractorSource;
     public float InteractRange;
+    public TextMeshProUGUI PromptText;
 
     void Update()
     {
-        //when 'e' is pressed, check for raycast
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Ray r = new Ray(InteractorSource.position, InteractorSource.forward);       //draws ray
+        bool foundInteractable = false;
 
-            //if raycast hits
-            if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+        Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
+        if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+        {
+            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
-                if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
+                PromptText.text = interactObj.InteractionPrompt;
+                foundInteractable = true;
+
+                //check for an interaction ('E')
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     interactObj.Interact();
                 }
             }
+        }
+
+        //if user is not looking at anything, clear prompt
+        if (!foundInteractable)
+        {
+            PromptText.text = "";
         }
     }
 }
