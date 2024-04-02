@@ -62,7 +62,7 @@ public class OreSpawner : MonoBehaviour
                 {
                     spawnPos.y -= 0.201f;   //readjusts y so that the prefab sits appropriately on the ground
                                             //the adjustments with the y position are because the prefab im using has an odd shaped collider
-                    Instantiate(orePrefab, spawnPos, Quaternion.identity);
+                    Instantiate(orePrefab, spawnPos, Quaternion.identity, transform);
                 }
             }
         }

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class Tree : MonoBehaviour, IInteractable
 {
@@ -46,7 +44,7 @@ public class Tree : MonoBehaviour, IInteractable
         if(axe != null)
         {
             //set current ore as the target
-            axe.targetTree = this; //current gameobject = ore player is looking at
+            axe.targetTree = this; //current gameobject = tree player is looking at
             axe.UseAxe();
         }
     }

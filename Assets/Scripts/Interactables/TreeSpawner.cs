@@ -3,6 +3,8 @@ using UnityEngine;
 public class TreeSpawner : MonoBehaviour
 {
     public GameObject treePrefab;
+    public GameObject treePrefab1;
+    public GameObject treePrefab2;
     public float spawnRadius = 10f;
     public int spawnAmount = 5;
     public LightingManager lightingManager;
@@ -62,7 +64,16 @@ public class TreeSpawner : MonoBehaviour
                 {
                     spawnPos.y -= 0.201f;   //readjusts y so that the prefab sits appropriately on the ground
                                             //the adjustments with the y position are because the prefab im using has an odd shaped collider
-                    Instantiate(treePrefab, spawnPos, Quaternion.identity);
+
+                    int randomInt = Random.Range(1, 3);
+
+                    if (randomInt == 1)
+                        treePrefab = treePrefab1;
+                    
+                    if (randomInt == 2)
+                        treePrefab = treePrefab2;
+
+                    Instantiate(treePrefab, spawnPos, Quaternion.identity, transform);
                 }
             }
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Spaceship
+  - StaticTree
   layers:
   - Default
   - TransparentFX

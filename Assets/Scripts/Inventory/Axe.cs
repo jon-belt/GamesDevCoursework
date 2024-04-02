@@ -52,7 +52,10 @@ public class Axe : MonoBehaviour
         }
 
         //calculate and add reward after animation is finished
-        float actualDurabilityReduced = targetTree.ReduceDurability(strength);
+        float actualDurabilityReduced;
+
+        actualDurabilityReduced = targetTree.ReduceDurability(strength);
+        
         if (playerInventory != null)
         {
             playerInventory.AddToWood(actualDurabilityReduced); 
