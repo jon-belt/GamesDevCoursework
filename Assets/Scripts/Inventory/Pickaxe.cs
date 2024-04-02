@@ -3,21 +3,15 @@ using System.Collections;
 
 public class Pickaxe : MonoBehaviour
 {
-    public PlayerBalance balance;
-    public float strength = 4f;
+    public PlayerInventory playerInventory;
+    public float strength = 2f;
     public Ore targetOre;
     private Animator animator;
     [SerializeField] private bool isUsingPickaxe = false;
 
     private void Start()
     {
-
-
         animator = GetComponent<Animator>();
-        if (targetOre == null)
-        {
-            Debug.LogError("No target ore set.");
-        }
     }
 
     public void UsePickaxe()
@@ -58,13 +52,13 @@ public class Pickaxe : MonoBehaviour
 
         //calculate and add reward after animation is finished
         float actualDurabilityReduced = targetOre.ReduceDurability(strength);
-        if (balance != null)
+        if (playerInventory != null)
         {
-            balance.AddToBalance(actualDurabilityReduced); 
+            playerInventory.AddToOre(actualDurabilityReduced); 
         }
         else
         {
-            Debug.LogError("Error loading balance");
+            Debug.LogError("PlayerInventory not found");
         }
 
         isUsingPickaxe = false;

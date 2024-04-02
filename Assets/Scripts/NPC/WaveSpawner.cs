@@ -68,7 +68,7 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(Transform _enemyPrefab)
     {
-        Debug.Log("Spawning Enemy: " + _enemyPrefab.name); // Debugging purposes
+        //Debug.Log("Spawning Enemy: " + _enemyPrefab.name); // Debugging purposes
 
         if (spawnPoints.Length > 0)
         {
