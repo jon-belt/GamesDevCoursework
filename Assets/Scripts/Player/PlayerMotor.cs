@@ -15,6 +15,7 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
+    public bool canMove = true;
     [SerializeField] public float stamina;
     [SerializeField] public float maxStamina;
     
@@ -35,6 +36,8 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (!canMove) return;   //skips all code if the player can't move
+
         isGrounded = controller.isGrounded;
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         bool isMoving = input.sqrMagnitude > 0.01f;
@@ -100,6 +103,8 @@ public class PlayerMotor : MonoBehaviour
     //recieve inputs from input manager script and apply to controller
     public void ProcessMove(Vector2 input)
     {
+        if (!canMove) return;   //skips all code if the player can't move
+
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
