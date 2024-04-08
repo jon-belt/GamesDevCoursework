@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Rifle : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 100f;
@@ -37,8 +37,13 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void IncreaseDamage(float amount)
+    public void IncDamage(float amount)
     {
         damage += amount;
+    }
+
+    public void IncRange(float amount)
+    {
+        range += amount;
     }
 }

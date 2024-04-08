@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class PlayerStamina : MonoBehaviour
 {
-    //this is defo over the top for the stamina bar
-    //it works and i dont have the time to optimise it, not for the demo at least
-
     private PlayerMotor playerMotor; 
     public float stamina;
     private float lerpTimer;

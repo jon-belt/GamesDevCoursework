@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     private float lerpTimer;
     [Header("PlayerHealth Bar")]
     public float maxHealth = 100f;
+    public float regenRate = 0.1f;
     public float chipSpeed = 2f;
     public Image frontHealthbar;
     public Image backHealthbar;
@@ -25,12 +26,25 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        regenRate = 0.2f;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //base regen rate
+        if (health < maxHealth)
+        {
+            health += regenRate * Time.deltaTime;
+
+            // Ensure health does not exceed maxHealth
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+        }
+
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
         if (overlay.color.a > 0)    //checks overlay alpha channel
@@ -44,7 +58,6 @@ public class PlayerHealth : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
             }
         }
-
     }
 
     public void UpdateHealthUI()
@@ -94,8 +107,13 @@ public class PlayerHealth : MonoBehaviour
         lerpTimer = 0f;
     }
 
-    public void IncreaseHealth(int num)
+    public void IncreaseHealth(float num)
     {
         maxHealth += num;
+    }
+
+    public void IncreaseRegenRate(float num)
+    {
+        regenRate += num;
     }
 }

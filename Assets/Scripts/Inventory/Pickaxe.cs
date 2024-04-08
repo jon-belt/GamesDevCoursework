@@ -6,12 +6,15 @@ public class Pickaxe : MonoBehaviour
     public PlayerInventory playerInventory;
     public float strength = 2f;
     public Ore targetOre;
+
     private Animator animator;
+    private float rewardMultiplier;
     [SerializeField] private bool isUsingPickaxe = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        rewardMultiplier = 1;
     }
 
     public void UsePickaxe()
@@ -54,7 +57,7 @@ public class Pickaxe : MonoBehaviour
         float actualDurabilityReduced = targetOre.ReduceDurability(strength);
         if (playerInventory != null)
         {
-            playerInventory.AddToOre(actualDurabilityReduced); 
+            playerInventory.AddToOre(actualDurabilityReduced+rewardMultiplier); 
         }
         else
         {
@@ -62,5 +65,16 @@ public class Pickaxe : MonoBehaviour
         }
 
         isUsingPickaxe = false;
+    }
+
+    public void IncStrength()
+    {
+        strength += 2;
+    }
+
+    public void IncReward()
+    {
+        //reward is multiplied each time, as it is only added to the durability (line 60)
+        rewardMultiplier *= 2;
     }
 }

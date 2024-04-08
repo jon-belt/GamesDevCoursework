@@ -6,7 +6,9 @@ public class Axe : MonoBehaviour
     public PlayerInventory playerInventory;
     public float strength = 2f;
     public Tree targetTree;
+    
     private Animator animator;
+    private float rewardMultiplier;
     [SerializeField] private bool isUsingAxe = false;
 
     private void Start()
@@ -58,7 +60,7 @@ public class Axe : MonoBehaviour
         
         if (playerInventory != null)
         {
-            playerInventory.AddToWood(actualDurabilityReduced); 
+            playerInventory.AddToWood(actualDurabilityReduced+rewardMultiplier); 
         }
         else
         {
@@ -66,5 +68,16 @@ public class Axe : MonoBehaviour
         }
 
         isUsingAxe = false;
+    }
+
+        public void IncStrength()
+    {
+        strength += 2;
+    }
+
+    public void IncReward()
+    {
+        //reward is multiplied each time, as it is only added to the durability (line 60)
+        rewardMultiplier *= 2;
     }
 }

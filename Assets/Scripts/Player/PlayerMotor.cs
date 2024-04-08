@@ -15,6 +15,7 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
+    public float RegenRate = 0.5f;
     public bool canMove = true;
     [SerializeField] public float stamina;
     [SerializeField] public float maxStamina;
@@ -82,7 +83,7 @@ public class PlayerMotor : MonoBehaviour
             if (!sprinting && isGrounded)
             {
             //stamina regenerates at a lower rate than it decreases while sprinting, so the user cannot permanently sprint
-            stamina += 0.5f * Time.deltaTime;   //regenerate stamina over time, making it frame-rate independent
+            stamina += RegenRate * Time.deltaTime;   //regenerate stamina over time, making it frame-rate independent
             }
         }
 
@@ -163,8 +164,13 @@ public class PlayerMotor : MonoBehaviour
             }
         }
     }
-    public void IncreaseStamina(int num)
+    public void IncreaseMaxStamina(float num)
     {
         maxStamina += num;
+    }
+
+    public void IncreaseRegenRate(float num)
+    {
+        RegenRate += num;
     }
 }
