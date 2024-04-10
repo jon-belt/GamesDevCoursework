@@ -14,6 +14,9 @@ public class EnemyAttack : MonoBehaviour
     private float attackRange = 2f;
     private Transform target;
     private Transform closerTarget;
+    private float timeSinceLastAttack = 0f;
+    private float attackCooldown = 1f; // Cooldown period in seconds
+
 
     void Start()
     {
@@ -27,28 +30,29 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        //Sets target so that enemy will only attack the target they're already locked on to
+        timeSinceLastAttack += Time.deltaTime;  //ensures enemy doesnt attack each frame
         Transform target = enemyFollow.GetClosestTarget();
 
-        //if(isAttacking = false && attackRange > Vector3.Distance(transform.position, target.transform.position))
-        if(attackRange > Vector3.Distance(transform.position, target.transform.position))
+        if (target != null && attackRange > Vector3.Distance(transform.position, target.position))
         {
-            //isAttacking = true;
-
-            if(target == GameObject.FindGameObjectWithTag("Player").transform)
+            if (timeSinceLastAttack >= attackCooldown)
             {
-                health.TakeDamage(15);
-            }
+                //reset timer
+                timeSinceLastAttack = 0;
 
-            if(target == GameObject.FindGameObjectWithTag("Spaceship").transform)
-            {
-                spaceshipHealth.TakeDamage(10);
-            }
+                //attack logic
+                if (target == playerTransform)
+                {
+                    health.TakeDamage(15);
+                    Debug.Log("Player damaged");
+                }
 
-            //TO DO:
-            // make attacking once per second, instead of potentially once a frame
-            
-            //isAttacking = false;
+                else if (target == spaceshipTransform)
+                {
+                    spaceshipHealth.TakeDamage(10);
+                    Debug.Log("Spaceship damaged");
+                }
+            }
         }
     }
 }

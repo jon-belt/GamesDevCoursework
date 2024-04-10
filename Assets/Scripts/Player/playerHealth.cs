@@ -33,6 +33,13 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //initial check: is player alive?
+        if (health <= 0)
+        {
+            Debug.Log("Player is dead, GAME OVER...");
+            return;
+        }
+
         //base regen rate
         if (health < maxHealth)
         {
