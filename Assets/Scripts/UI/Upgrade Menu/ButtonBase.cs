@@ -8,7 +8,7 @@ public abstract class ButtonBase : MonoBehaviour
 
     protected int CurrentUpgradeCost;
     protected abstract int BaseUpgradeCost { get; }
-    protected abstract int UpgradePriceInc { get; }
+    protected abstract int UpgradePriceInc {get; }
 
     protected virtual void Start()
     {

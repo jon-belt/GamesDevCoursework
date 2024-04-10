@@ -7,6 +7,16 @@ public class HotbarManager : MonoBehaviour
     public GameObject[] items;  //list of holdable items
     private int currentIndex = -1;
 
+    //these two bools ensure the user cannot bring out item they have not purchased yet
+    private bool compassPurchased;
+    private bool sniperPurchased;
+
+    void Start()
+    {
+        compassPurchased = false;
+        sniperPurchased = false;
+    }
+
     void Update()
     {
         for(int i = 0; i < items.Length; i++)
@@ -27,8 +37,30 @@ public class HotbarManager : MonoBehaviour
             items[currentIndex].SetActive(false);
         }
 
-        //show current item
+        //next two if statements end the script if the compass or sniper has not been purchased
+        //probably not the best way to do it, but it works
+        if (items[index].name == "Compass" && compassPurchased == false)
+        {
+            return;
+        }
+
+        if (items[index].name == "Sniper" && sniperPurchased == false)
+        {
+            return;
+        }
+
+        //show item
         items[index].SetActive(true);
-        currentIndex = index; // Update the current index
+        currentIndex = index;   //update the current index
+    }
+
+    public void PurchaseCompass()
+    {
+        compassPurchased = true;
+    }
+
+    public void PurchaseRifle()
+    {
+        sniperPurchased = true;
     }
 }

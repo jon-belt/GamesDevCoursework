@@ -62,4 +62,26 @@ public class EnemyFollow : MonoBehaviour
         //sets route
         agent.SetDestination(closerTarget.position);
     }
+
+    public Transform GetClosestTarget()
+    {
+        Transform closerTarget;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        float distanceToSpaceship = Vector3.Distance(transform.position, spaceshipTransform.position);
+
+        if (distanceToSpaceship > distanceToPlayer)
+        {
+            closerTarget = playerTransform;
+        }
+        else if (distanceToSpaceship < distanceToPlayer)
+        {
+            closerTarget = spaceshipTransform;
+        }
+        else
+        {
+            closerTarget = playerTransform;
+        }
+        return closerTarget;
+    }
 }
