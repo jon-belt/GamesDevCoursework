@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BuyWalls : OneTimePurchaseButton
+public class BuyFloodlight : OneTimePurchaseButton
 {
-    public GameObject walls;
-    protected override int ItemCost => 200;
+    public GameObject floodLight;
+    protected override int ItemCost => 100;
     protected override string SuccessText => "Purchased";
 
     protected override void Start()
@@ -13,7 +13,7 @@ public class BuyWalls : OneTimePurchaseButton
 
     protected override void ApplyUpgrade()
     {
-        walls.SetActive(true);
+        floodLight.SetActive(true);
     }
 }
 

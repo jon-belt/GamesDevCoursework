@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -11,6 +8,7 @@ public class Turret : MonoBehaviour
     public Transform firePoint;     //empty gameobject, this is where the bullet starts at
     public float range;         //can be upgraded
     public float fireRate;      //can be upgraded
+    public float damage;        //might be upgraded in the future?  otherwise useless
 
     private float fireCountdown = 0f;
     
@@ -97,5 +95,15 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    public void increaseRange()
+    {
+        range += 10;
+    }
+
+    public void increaseFirerate()
+    {
+        fireRate += 1;
     }
 }

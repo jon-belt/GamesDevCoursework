@@ -21,8 +21,8 @@ public class LightingManager : MonoBehaviour
 
     void Start()
     {
-        //game starts at '6 am'
-        TimeOfDay = 6 ;
+        //game starts at '6:30 am'
+        TimeOfDay = 6.5f ;
         DayCount = 1;
         
         UpdateLighting(TimeOfDay / 24f);
@@ -105,14 +105,14 @@ public class LightingManager : MonoBehaviour
 
     private void CheckDay()
     {
-        // Increment day count just after midnight
-        if (TimeOfDay >= 0.0 && TimeOfDay < 1.0 && !dayPassed) // Assuming TimeOfDay resets to 0 at midnight
+        // Increment day count just after enemies stop spawning
+        if (TimeOfDay >= 6.0 && TimeOfDay < 6.2 && !dayPassed) // Assuming TimeOfDay resets to 0 at midnight
         {
             DayCount++;
             dayPassed = true; // Mark that the day has been counted
             Debug.Log("Starting Day: " + DayCount);
         }
-        else if (TimeOfDay >= 1.0) // Ensure dayPassed is reset after TimeOfDay has sufficiently advanced
+        else if (TimeOfDay >= 6.2) // Ensure dayPassed is reset after TimeOfDay has sufficiently advanced
         {
             dayPassed = false;
         }

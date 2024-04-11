@@ -9,12 +9,10 @@ public class HotbarManager : MonoBehaviour
 
     //these two bools ensure the user cannot bring out item they have not purchased yet
     private bool compassPurchased;
-    private bool sniperPurchased;
 
     void Start()
     {
         compassPurchased = false;
-        sniperPurchased = false;
     }
 
     void Update()
@@ -44,11 +42,6 @@ public class HotbarManager : MonoBehaviour
             return;
         }
 
-        if (items[index].name == "Sniper" && sniperPurchased == false)
-        {
-            return;
-        }
-
         //show item
         items[index].SetActive(true);
         currentIndex = index;   //update the current index
@@ -57,10 +50,5 @@ public class HotbarManager : MonoBehaviour
     public void PurchaseCompass()
     {
         compassPurchased = true;
-    }
-
-    public void PurchaseRifle()
-    {
-        sniperPurchased = true;
     }
 }

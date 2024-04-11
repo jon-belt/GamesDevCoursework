@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private float attackRange = 2f;
+    private float attackRange = 3.5f;
     private float timeSinceLastAttack = 0f;
     private float attackCooldown = 1f;
     private bool isAttacking = false;
