@@ -3,16 +3,15 @@ using UnityEngine.AI;
 
 public class EnemyFollow : MonoBehaviour
 {
+    public EnemyAttack enemyAttack;
+
     private Transform playerTransform;
     private Transform spaceshipTransform;
     private NavMeshAgent agent;
 
     void Start()
     {
-        //sets player
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
-        //sets spaceship
         spaceshipTransform = GameObject.FindGameObjectWithTag("Spaceship").transform;
 
         if (playerTransform == null || spaceshipTransform == null)
@@ -21,67 +20,32 @@ public class EnemyFollow : MonoBehaviour
             return;
         }
 
-        //sets navmesh
         agent = GetComponent<NavMeshAgent>();
+        enemyAttack = GetComponent<EnemyAttack>();
     }
 
     void Update()
     {
-        //finds closer target
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        float distanceToSpaceship = Vector3.Distance(transform.position, spaceshipTransform.position);
-
-        //distance finding algorithm: 50/50 with a bias towards the player
-        Transform closerTarget;
-
-        //logic to attack player, if player is close to the ship, possibly defending it
-        //check if the enemy is within 2m of the spaceship
-        if (distanceToSpaceship <= 2) {
-            if (distanceToPlayer < distanceToSpaceship * 1.5)
-            {
-                closerTarget = playerTransform;
-            }
-            else
-            {
-                closerTarget = spaceshipTransform;
-            }
+        //if the enemy is currently attacking
+        if (enemyAttack.GetIsAttacking())
+        {
+            Debug.Log("Enemy is attacking");
+            agent.isStopped = true;
         }
-
-        //chose closer target if alien is not currently attacking the ship
         else
         {
-            if (distanceToPlayer < distanceToSpaceship)
-            {
-                closerTarget = playerTransform;
-            }
-            else {
-                closerTarget = spaceshipTransform;
-            }
+            agent.isStopped = false;
+            Transform target = GetClosestTarget();
+            agent.SetDestination(target.position);
         }
-
-        //sets route
-        agent.SetDestination(closerTarget.position);
     }
 
     public Transform GetClosestTarget()
     {
-        Transform closerTarget;
-
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         float distanceToSpaceship = Vector3.Distance(transform.position, spaceshipTransform.position);
 
-        if (distanceToSpaceship > distanceToPlayer)
-        {
-            closerTarget = playerTransform;
-        }
-        else if (distanceToSpaceship < distanceToPlayer)
-        {
-            closerTarget = spaceshipTransform;
-        }
-        else
-        {
-            closerTarget = playerTransform;
-        }
-        return closerTarget;
+        //return shortest distance 
+        return distanceToPlayer < distanceToSpaceship ? playerTransform : spaceshipTransform;
     }
 }

@@ -1,58 +1,63 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Transform playerTransform;
-    public Transform spaceshipTransform;
-    public PlayerHealth health;
-    public EnemyFollow enemyFollow;
-    public SpaceshipHealth spaceshipHealth;
-
-    //private bool isAttacking;
     private float attackRange = 2f;
-    private Transform target;
-    private Transform closerTarget;
     private float timeSinceLastAttack = 0f;
-    private float attackCooldown = 1f; // Cooldown period in seconds
+    private float attackCooldown = 1f;
+    private bool isAttacking = false;
 
+    public PlayerHealth playerHealth;
+    public SpaceshipHealth spaceshipHealth;
+    public EnemyFollow enemyFollow;
 
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        spaceshipTransform = GameObject.FindGameObjectWithTag("Spaceship").transform;
-
-        // Initialize closerTarget to a default.
-        closerTarget = playerTransform; // Default to player, for example.
-    }   
-
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        spaceshipHealth = FindObjectOfType<SpaceshipHealth>();
+    }
 
     void Update()
     {
-        timeSinceLastAttack += Time.deltaTime;  //ensures enemy doesnt attack each frame
-        Transform target = enemyFollow.GetClosestTarget();
-
-        if (target != null && attackRange > Vector3.Distance(transform.position, target.position))
+        if (isAttacking)
         {
-            if (timeSinceLastAttack >= attackCooldown)
+            //reset attacking status after a cooldown
+            if ((timeSinceLastAttack += Time.deltaTime) >= attackCooldown)
             {
-                //reset timer
+                isAttacking = false;
                 timeSinceLastAttack = 0;
+            }
+            return;
+        }
 
-                //attack logic
-                if (target == playerTransform)
-                {
-                    health.TakeDamage(15);
-                    Debug.Log("Player damaged");
-                }
+        Transform target = enemyFollow.GetClosestTarget();
+        if (target != null && attackRange >= Vector3.Distance(transform.position, target.position))
+        {
+            //attack logic
+            isAttacking = true;
+            timeSinceLastAttack = 0; //immediately start cooldown
 
-                else if (target == spaceshipTransform)
-                {
-                    spaceshipHealth.TakeDamage(10);
-                    Debug.Log("Spaceship damaged");
-                }
+            if (target.CompareTag("Player"))
+            {
+                playerHealth.TakeDamage(15);
+                Debug.Log("Player damaged");
+            }
+
+            else if (target.CompareTag("Spaceship"))
+            {
+                spaceshipHealth.TakeDamage(10);
+                Debug.Log("Spaceship damaged");
             }
         }
+    }
+
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
+    }
+
+    public void SetIsAttacking(bool set)
+    {
+        isAttacking = set;
     }
 }

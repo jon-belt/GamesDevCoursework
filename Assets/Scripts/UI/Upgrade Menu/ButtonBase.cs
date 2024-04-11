@@ -5,6 +5,7 @@ public abstract class ButtonBase : MonoBehaviour
 {
     public TextMeshProUGUI  buttonText;
     public PlayerInventory playerInventory;
+    public UpgradeMenuText upgradeMenuText;
 
     protected int CurrentUpgradeCost;
     protected abstract int BaseUpgradeCost { get; }
@@ -13,6 +14,7 @@ public abstract class ButtonBase : MonoBehaviour
     protected virtual void Start()
     {
         CurrentUpgradeCost = BaseUpgradeCost;
+        upgradeMenuText = FindObjectOfType<UpgradeMenuText>();
         UpdateButtonUI();
     }
 
@@ -30,7 +32,7 @@ public abstract class ButtonBase : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough balance.");
+            upgradeMenuText.UpdateMessage("Not enough scrap...");
         }
     }
 
