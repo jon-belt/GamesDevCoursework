@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour, IDataPersistence
 {
-    [SerializeField]public float balance;
-    [SerializeField]public float ore;
-    [SerializeField]public float wood;
+    [SerializeField]public float balance = 0f;
+    [SerializeField]public float ore = 0f;
+    [SerializeField]public float wood= 0f;
 
-    void Start()
-    {
-        balance = 0f;
-        ore = 0f;
-        wood = 0f;
-    }
+    // void Start()
+    // {
+    //     balance = 0f;
+    //     ore = 0f;
+    //     wood = 0f;
+    // }
 
     //balance methods
     public float GetBalance()
@@ -55,5 +55,16 @@ public class PlayerInventory : MonoBehaviour
     public void RemoveFromWood(float amount)
     {
         wood -= amount;
+    }
+
+    //Save interface methods
+    public void LoadData(GameData data)
+    {
+        this.balance = data.balance;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.balance = this.balance;
     }
 }

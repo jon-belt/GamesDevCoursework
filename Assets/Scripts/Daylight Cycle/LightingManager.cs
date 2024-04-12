@@ -11,10 +11,9 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private LightingPreset Preset;
 
     //variables
-
-    [SerializeField, Range(0, 24)] private float TimeOfDay;
-    [SerializeField] private int DayCount;
-    [SerializeField] private float MinsPerDay = 12f;    //amount of real world mins to in game days
+    [SerializeField, Range(0, 24)] public float TimeOfDay;
+    [SerializeField] public int DayCount;
+    [SerializeField] public float MinsPerDay = 12f;    //amount of real world mins to in game days
                                                         //every real world 12 mins should be an in game 24 hours
     private float lastLogTime = -1;
     private bool dayPassed = false;

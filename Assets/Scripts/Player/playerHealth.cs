@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField]
-    private float health;
+    public float health;
     private float lerpTimer;
     [Header("PlayerHealth Bar")]
     public float maxHealth = 100f;

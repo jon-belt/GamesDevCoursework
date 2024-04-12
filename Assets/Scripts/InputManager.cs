@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
     public PlayerInput.OnFootActions OnFoot;
 
+    private PlayerInput playerInput;
     private PlayerMotor motor;
     private PlayerLook look;
+    private float savedSensitivity;
 
     //called once when script is first loaded
     void Awake()
@@ -23,11 +24,22 @@ public class InputManager : MonoBehaviour
         OnFoot.Sprint.performed += ctx => motor.Sprint();
     }
 
+    void Start()
+    {
+        savedSensitivity = PlayerPrefs.GetFloat("mouseSensitivity", 0.5f);
+    }
+
     // called once per 'fixed' frame
     void FixedUpdate()
     {
         //tell playermotor to move using value from our movement action
         motor.ProcessMove(OnFoot.Movement.ReadValue<Vector2>());
+    }
+
+    void Update()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * savedSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * savedSensitivity;
     }
 
     //called last 
