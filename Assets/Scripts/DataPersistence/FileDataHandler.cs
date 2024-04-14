@@ -70,4 +70,48 @@ public class FileDataHandler
             Debug.LogError("Error occured whilst saving data to file: " + fullPath + "\n" + e);
         }
     }
+
+    public void SaveButtonData(List<ButtonSaveData> buttonData)
+    {
+        if (buttonData == null || buttonData.Count == 0)
+        {
+            Debug.LogError("No button data to save.");
+            return;
+        }
+        string buttonDataPath = Path.Combine(dataDirPath, "buttonData.json");
+        string dataToStore = JsonUtility.ToJson(new Serialization<ButtonSaveData>(buttonData), true);
+        File.WriteAllText(buttonDataPath, dataToStore);
+    }
+
+    public List<ButtonSaveData> LoadButtonData()
+    {
+        string buttonDataPath = Path.Combine(dataDirPath, "buttonData.json");
+        if (File.Exists(buttonDataPath))
+        {
+            string dataToLoad = File.ReadAllText(buttonDataPath);
+            var data = JsonUtility.FromJson<Serialization<ButtonSaveData>>(dataToLoad);
+            Debug.Log($"Loaded Button Data: {dataToLoad}");
+            return data.ToList();
+        }
+        return new List<ButtonSaveData>();
+    }
+
+
+    [System.Serializable]
+    private class Serialization<T>
+    {
+        public List<T> items;
+        public List<T> ToList() { return items; }
+        public Serialization(List<T> items)
+        {
+            this.items = items;
+        }
+    } 
+
+    public void SaveGameData(GameData gameData)
+    {
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string dataToStore = JsonUtility.ToJson(gameData, true);
+        File.WriteAllText(fullPath, dataToStore);
+    }
 }

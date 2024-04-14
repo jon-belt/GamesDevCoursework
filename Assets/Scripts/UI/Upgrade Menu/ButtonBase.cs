@@ -7,7 +7,7 @@ public abstract class ButtonBase : MonoBehaviour
     public PlayerInventory playerInventory;
     public UpgradeMenuText upgradeMenuText;
 
-    protected int CurrentUpgradeCost;
+    public int CurrentUpgradeCost;
     protected abstract int BaseUpgradeCost { get; }
     protected abstract int UpgradePriceInc {get; }
 
@@ -48,5 +48,22 @@ public abstract class ButtonBase : MonoBehaviour
     public void OnUpgradeButtonClicked()
     {
         PurchaseUpgrade();
+    }
+
+    // Method to create a data object that contains all necessary information to save the state of the button
+    public virtual ButtonSaveData GetSaveData()
+    {
+        return new ButtonSaveData
+        {
+            buttonType = this.GetType().ToString(), // Get the specific type of button to enable correct loading
+            currentUpgradeCost = this.CurrentUpgradeCost
+        };
+    }
+
+    // Method to apply saved data to the button
+    public virtual void SetSaveData(ButtonSaveData saveData)
+    {
+        this.CurrentUpgradeCost = saveData.currentUpgradeCost;
+        UpdateButtonUI();
     }
 }

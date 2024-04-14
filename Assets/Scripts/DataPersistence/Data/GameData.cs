@@ -12,5 +12,5 @@ public class GameData
     {
         //default values
         this.balance = 0;
-    } 
+    }
 }

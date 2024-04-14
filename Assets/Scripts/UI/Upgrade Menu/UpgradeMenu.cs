@@ -7,6 +7,7 @@ public class UpgradeMenu : MonoBehaviour
     public GameObject upgradeMenuUI;
     public PlayerMotor playerMotor;
     public PlayerLook playerLook;
+    public DataPersistenceManager dataPersistenceManager;
 
     void Start()
     {
@@ -30,5 +31,21 @@ public class UpgradeMenu : MonoBehaviour
 
         playerMotor.canMove = false;
         playerLook.canLookAround = false;
-    }    
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(EnsureDataManagerReady());
+    }
+
+    private IEnumerator EnsureDataManagerReady()
+    {
+        while (DataPersistenceManager.instance == null)
+        {
+            Debug.Log("Waiting for DataPersistenceManager...");
+            yield return null;
+        }
+        
+        DataPersistenceManager.instance.ApplyDataWhenReady();
+    }
 }
