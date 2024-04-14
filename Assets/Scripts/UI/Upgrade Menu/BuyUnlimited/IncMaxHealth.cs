@@ -14,6 +14,7 @@ public class IncMaxHealth : ButtonBase
         playerHealth.IncreaseHealth(20f);
 
         UpgradeCount += 1;
+        CurrentUpgradeCost += UpgradePriceInc;
     }
 
     public override ButtonSaveData GetSaveData()

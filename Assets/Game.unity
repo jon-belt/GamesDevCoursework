@@ -1107,7 +1107,9 @@ MonoBehaviour:
   buttonText: {fileID: 887873376}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 1466152754}
+  CurrentUpgradeCost: 0
   turretManager: {fileID: 1590303004}
+  UpgradeCount: 0
 --- !u!1 &86722856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1392,7 @@ MonoBehaviour:
   buttonText: {fileID: 1742588210}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   playerHealth: {fileID: 850336300}
   UpgradeCount: 0
 --- !u!4 &94860322 stripped
@@ -3042,6 +3045,7 @@ MonoBehaviour:
   buttonText: {fileID: 1057696726}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   axe: {fileID: 181249660}
   UpgradeCount: 0
 --- !u!1 &309193779
@@ -3692,6 +3696,7 @@ MonoBehaviour:
   buttonText: {fileID: 178584595}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   UpgradeCount: 0
   rifle: {fileID: 1389591377}
 --- !u!1001 &400534155
@@ -12337,6 +12342,7 @@ MonoBehaviour:
   buttonText: {fileID: 1269016521}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   axe: {fileID: 181249660}
   UpgradeCount: 0
 --- !u!1001 &777305166
@@ -12510,6 +12516,7 @@ MonoBehaviour:
   upgradeMenuUI: {fileID: 786280047}
   playerMotor: {fileID: 850336284}
   playerLook: {fileID: 850336289}
+  dataPersistenceManager: {fileID: 909968880}
 --- !u!1001 &788830266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14380,6 +14387,7 @@ MonoBehaviour:
   buttonText: {fileID: 1179600445}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   playerStamina: {fileID: 850336284}
   UpgradeCount: 0
 --- !u!1 &966525605
@@ -17284,6 +17292,7 @@ MonoBehaviour:
   buttonText: {fileID: 962887700}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   UpgradeCount: 0
   rifle: {fileID: 1389591377}
 --- !u!4 &1253830778 stripped
@@ -19674,6 +19683,7 @@ MonoBehaviour:
   buttonText: {fileID: 1943235588}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   pickaxe: {fileID: 2131481733}
   UpgradeCount: 0
 --- !u!1001 &1519009579
@@ -20207,6 +20217,7 @@ MonoBehaviour:
   buttonText: {fileID: 649804816}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   playerStamina: {fileID: 850336284}
   UpgradeCount: 0
 --- !u!4 &1548916325 stripped
@@ -21401,6 +21412,7 @@ MonoBehaviour:
   buttonText: {fileID: 927190516}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   pickaxe: {fileID: 2131481733}
   UpgradeCount: 0
 --- !u!1 &1645631540
@@ -28153,7 +28165,9 @@ MonoBehaviour:
   buttonText: {fileID: 1827375722}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 1466152754}
+  CurrentUpgradeCost: 0
   turretManager: {fileID: 1590303004}
+  UpgradeCount: 0
 --- !u!1 &1801684363
 GameObject:
   m_ObjectHideFlags: 0
@@ -35673,6 +35687,7 @@ MonoBehaviour:
   buttonText: {fileID: 1167389806}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 0}
+  CurrentUpgradeCost: 0
   playerHealth: {fileID: 850336300}
   UpgradeCount: 0
 --- !u!1001 &2055582480

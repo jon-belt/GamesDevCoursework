@@ -10,6 +10,7 @@ public abstract class ButtonBase : MonoBehaviour
     public int CurrentUpgradeCost;
     protected abstract int BaseUpgradeCost { get; }
     protected abstract int UpgradePriceInc {get; }
+    // public int UpgradeCount { get; protected set; }
 
     protected virtual void Start()
     {
@@ -18,6 +19,10 @@ public abstract class ButtonBase : MonoBehaviour
         UpdateButtonUI();
     }
 
+    public int CalculatePrice(int UpgradeCount)
+    {
+        return BaseUpgradeCost + (UpgradePriceInc * UpgradeCount);
+    }
 
     //method used by any child of this class to purchase using balance
     protected virtual void PurchaseUpgrade()
@@ -55,15 +60,15 @@ public abstract class ButtonBase : MonoBehaviour
     {
         return new ButtonSaveData
         {
-            buttonType = this.GetType().ToString(), // Get the specific type of button to enable correct loading
-            currentUpgradeCost = this.CurrentUpgradeCost
+            buttonType = GetType().ToString(), // Get the specific type of button to enable correct loading
+            currentUpgradeCost = CurrentUpgradeCost
         };
     }
 
     // Method to apply saved data to the button
     public virtual void SetSaveData(ButtonSaveData saveData)
     {
-        this.CurrentUpgradeCost = saveData.currentUpgradeCost;
+        CurrentUpgradeCost = saveData.currentUpgradeCost;
         UpdateButtonUI();
     }
 }

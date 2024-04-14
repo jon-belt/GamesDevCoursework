@@ -78,6 +78,9 @@ public class FileDataHandler
             Debug.LogError("No button data to save.");
             return;
         }
+        // foreach(var data in buttonData) {
+        //     Debug.Log($"Saving Button Data: Type={data.buttonType}, Cost={data.currentUpgradeCost}, Count={data.upgradeCount}");
+        // }
         string buttonDataPath = Path.Combine(dataDirPath, "buttonData.json");
         string dataToStore = JsonUtility.ToJson(new Serialization<ButtonSaveData>(buttonData), true);
         File.WriteAllText(buttonDataPath, dataToStore);
@@ -89,24 +92,32 @@ public class FileDataHandler
         if (File.Exists(buttonDataPath))
         {
             string dataToLoad = File.ReadAllText(buttonDataPath);
-            var data = JsonUtility.FromJson<Serialization<ButtonSaveData>>(dataToLoad);
             Debug.Log($"Loaded Button Data: {dataToLoad}");
-            return data.ToList();
+            var data = JsonUtility.FromJson<Serialization<ButtonSaveData>>(dataToLoad);
+            if (data != null && data.items != null)
+                return data.items;
+            else
+                Debug.LogError("Failed to deserialize button data or no items found.");
+        }
+        else
+        {
+            Debug.Log("No button data file found.");
         }
         return new List<ButtonSaveData>();
     }
-
 
     [System.Serializable]
     private class Serialization<T>
     {
         public List<T> items;
-        public List<T> ToList() { return items; }
+
         public Serialization(List<T> items)
         {
             this.items = items;
         }
-    } 
+
+        public List<T> ToList() => items;
+    }
 
     public void SaveGameData(GameData gameData)
     {
