@@ -1,32 +1,29 @@
 using UnityEngine;
 
-public class IncMaxHealth : ButtonBase
+public class IncMaxHealth : ButtonBase, IDataPersistence
 {
     public PlayerHealth playerHealth;
-    public int UpgradeCount = 0;
+    private int upgradeCount = 0;
 
     protected override int UpgradePriceInc => 10;
     protected override int BaseUpgradeCost => 20;
+    protected override int UpgradeCount => upgradeCount;
 
     protected override void ApplyUpgrade()
     {
         Debug.Log("Health Increased by 20");
         playerHealth.IncreaseHealth(20f);
-
-        UpgradeCount += 1;
-        CurrentUpgradeCost += UpgradePriceInc;
+        upgradeCount += 1;
     }
 
-    public override ButtonSaveData GetSaveData()
+    public void LoadData(GameData data)
     {
-        var baseData = base.GetSaveData();
-        baseData.upgradeCount = this.UpgradeCount;
-        return baseData;
+        this.upgradeCount = data.maxHealth;
+        UpdateButtonUI();
     }
 
-    public override void SetSaveData(ButtonSaveData saveData)
+    public void SaveData(ref GameData data)
     {
-        base.SetSaveData(saveData);
-        this.UpgradeCount = saveData.upgradeCount;
-    }    
+        data.maxHealth = this.upgradeCount;
+    }
 }

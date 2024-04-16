@@ -3,10 +3,11 @@ using UnityEngine;
 public class IncAxeReward : ButtonBase
 {
     public Axe axe;
-    public int UpgradeCount = 0;
+    private int upgradeCount = 0;
 
     protected override int UpgradePriceInc => 10;
     protected override int BaseUpgradeCost => 20;
+    protected override int UpgradeCount => upgradeCount;
 
     protected override void ApplyUpgrade()
     {
@@ -14,19 +15,16 @@ public class IncAxeReward : ButtonBase
 
         axe.IncReward();
 
-        UpgradeCount += 1;
+        upgradeCount += 1;
     }
 
-    public override ButtonSaveData GetSaveData()
+    public void LoadData(GameData data)
     {
-        var baseData = base.GetSaveData();
-        baseData.upgradeCount = this.UpgradeCount;
-        return baseData;
+        this.upgradeCount = data.axeReward;
     }
 
-    public override void SetSaveData(ButtonSaveData saveData)
+    public void SaveData(ref GameData data)
     {
-        base.SetSaveData(saveData);
-        this.UpgradeCount = saveData.upgradeCount;
-    }    
+        data.axeReward = this.upgradeCount;
+    }
 }

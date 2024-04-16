@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class IncRifleRange : ButtonBase
 {
-    public int UpgradeCount = 0;
     public Rifle rifle;
+    private int upgradeCount = 0;
 
     protected override int UpgradePriceInc => 15;
     protected override int BaseUpgradeCost => 30;
+    protected override int UpgradeCount => upgradeCount;
     
     protected override void ApplyUpgrade()
     {
@@ -16,19 +17,15 @@ public class IncRifleRange : ButtonBase
 
         rifle.IncRange(10);
         
-        UpgradeCount += 1;
+        upgradeCount += 1;
+    }
+    public void LoadData(GameData data)
+    {
+        this.upgradeCount = data.rifleRange;
     }
 
-    public override ButtonSaveData GetSaveData()
+    public void SaveData(ref GameData data)
     {
-        var baseData = base.GetSaveData();
-        baseData.upgradeCount = this.UpgradeCount;
-        return baseData;
+        data.rifleRange = this.upgradeCount;
     }
-
-    public override void SetSaveData(ButtonSaveData saveData)
-    {
-        base.SetSaveData(saveData);
-        this.UpgradeCount = saveData.upgradeCount;
-    }   
 }

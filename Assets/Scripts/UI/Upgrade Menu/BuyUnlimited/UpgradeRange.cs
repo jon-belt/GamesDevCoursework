@@ -5,9 +5,10 @@ using UnityEngine;
 public class UpgradeRange : ButtonBase
 {
     public TurretManager turretManager;
-    public int UpgradeCount;
+    private int upgradeCount = 0;
     protected override int UpgradePriceInc => 10;
     protected override int BaseUpgradeCost => 50;
+    protected override int UpgradeCount => upgradeCount;
 
     protected override void ApplyUpgrade()
     {
@@ -23,19 +24,16 @@ public class UpgradeRange : ButtonBase
                 turret.increaseRange();
             }
         }
-        UpgradeCount += 1;
+        upgradeCount += 1;
     }
 
-    public override ButtonSaveData GetSaveData()
+    public void LoadData(GameData data)
     {
-        var baseData = base.GetSaveData();
-        baseData.upgradeCount = this.UpgradeCount;
-        return baseData;
+        this.upgradeCount = data.turretRange;
     }
 
-    public override void SetSaveData(ButtonSaveData saveData)
+    public void SaveData(ref GameData data)
     {
-        base.SetSaveData(saveData);
-        this.UpgradeCount = saveData.upgradeCount;
-    }    
+        data.turretRange = this.upgradeCount;
+    }
 }

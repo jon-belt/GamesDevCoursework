@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerStamina : MonoBehaviour
 {
+    //im not going to rename this script but this is the script just for the stamina UI, if i rename it breaks the game.. :)
     private PlayerMotor playerMotor; 
     public float stamina;
     private float lerpTimer;

@@ -1107,9 +1107,7 @@ MonoBehaviour:
   buttonText: {fileID: 887873376}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 1466152754}
-  CurrentUpgradeCost: 0
   turretManager: {fileID: 1590303004}
-  UpgradeCount: 0
 --- !u!1 &86722856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,10 +1389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1742588210}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   playerHealth: {fileID: 850336300}
-  UpgradeCount: 0
 --- !u!4 &94860322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3132566701815384705, guid: ebd71a89dde32644c93e2a2884a36440, type: 3}
@@ -3044,10 +3040,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1057696726}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   axe: {fileID: 181249660}
-  UpgradeCount: 0
 --- !u!1 &309193779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3695,9 +3689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 178584595}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
-  UpgradeCount: 0
+  upgradeMenuText: {fileID: 1466152754}
   rifle: {fileID: 1389591377}
 --- !u!1001 &400534155
 PrefabInstance:
@@ -5200,7 +5192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 598, y: 242}
+  m_AnchoredPosition: {x: 516, y: 175}
   m_SizeDelta: {x: 166, y: 166}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &502840225
@@ -6839,7 +6831,7 @@ Transform:
   m_GameObject: {fileID: 687352986}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -515, y: 269, z: 168.4653}
+  m_LocalPosition: {x: -434, y: 269, z: 168.4653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12341,10 +12333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1269016521}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   axe: {fileID: 181249660}
-  UpgradeCount: 0
 --- !u!1001 &777305166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13136,7 +13126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acb131a55ff28e4699a0fc0df12992d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balance: 0
+  balance: 1000
   ore: 0
   wood: 0
 --- !u!1001 &858047383
@@ -14386,10 +14376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1179600445}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   playerStamina: {fileID: 850336284}
-  UpgradeCount: 0
 --- !u!1 &966525605
 GameObject:
   m_ObjectHideFlags: 0
@@ -17291,9 +17279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 962887700}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
-  UpgradeCount: 0
+  upgradeMenuText: {fileID: 1466152754}
   rifle: {fileID: 1389591377}
 --- !u!4 &1253830778 stripped
 Transform:
@@ -18829,7 +18815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1012335511}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
+  upgradeMenuText: {fileID: 1466152754}
   compass: {fileID: 1814853147}
   hotbarManager: {fileID: 850336303}
 --- !u!1 &1422256837
@@ -19682,10 +19668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1943235588}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   pickaxe: {fileID: 2131481733}
-  UpgradeCount: 0
 --- !u!1001 &1519009579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20035,7 +20019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1608826238}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
+  upgradeMenuText: {fileID: 1466152754}
   timerLogic: {fileID: 502840226}
 --- !u!4 &1529888727 stripped
 Transform:
@@ -20216,10 +20200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 649804816}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   playerStamina: {fileID: 850336284}
-  UpgradeCount: 0
 --- !u!4 &1548916325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3132566701815384705, guid: ebd71a89dde32644c93e2a2884a36440, type: 3}
@@ -21411,10 +21393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 927190516}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   pickaxe: {fileID: 2131481733}
-  UpgradeCount: 0
 --- !u!1 &1645631540
 GameObject:
   m_ObjectHideFlags: 0
@@ -28165,9 +28145,7 @@ MonoBehaviour:
   buttonText: {fileID: 1827375722}
   playerInventory: {fileID: 850336307}
   upgradeMenuText: {fileID: 1466152754}
-  CurrentUpgradeCost: 0
   turretManager: {fileID: 1590303004}
-  UpgradeCount: 0
 --- !u!1 &1801684363
 GameObject:
   m_ObjectHideFlags: 0
@@ -35686,10 +35664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1167389806}
   playerInventory: {fileID: 850336307}
-  upgradeMenuText: {fileID: 0}
-  CurrentUpgradeCost: 0
+  upgradeMenuText: {fileID: 1466152754}
   playerHealth: {fileID: 850336300}
-  UpgradeCount: 0
 --- !u!1001 &2055582480
 PrefabInstance:
   m_ObjectHideFlags: 0

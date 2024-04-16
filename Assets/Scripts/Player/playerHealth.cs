@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDataPersistence
 {
     [SerializeField]
     public float health;
@@ -21,24 +21,31 @@ public class PlayerHealth : MonoBehaviour
     public float fadeSpeed;
 
     private float durationTimer;
+    private bool newGame = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
-        regenRate = 0.2f;
+        if (newGame == true)
+        {
+            //health = maxHealth;
+            health = 100f;
+            regenRate = 0.2f;
+            newGame = false;
+        }
+
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //initial check: is player alive?
-        if (health <= 0)
-        {
-            Debug.Log("Player is dead, GAME OVER...");
-            return;
-        }
+        // //initial check: is player alive?
+        // if (health <= 0)
+        // {
+        //     Debug.Log("Player is dead, GAME OVER...");
+        //     return;
+        // }
 
         //base regen rate
         if (health < maxHealth)
@@ -122,5 +129,23 @@ public class PlayerHealth : MonoBehaviour
     public void IncreaseRegenRate(float num)
     {
         regenRate += num;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.regenRate = data.healthRegenRate;
+        this.health = data.health;
+        this.newGame = data.healthNewGame;
+
+        print("Data loaded for player health");
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.healthRegenRate = this.regenRate;
+        data.health = this.health;
+        data.healthNewGame = this.newGame;
+
+        print("Data saved for player health");
     }
 }

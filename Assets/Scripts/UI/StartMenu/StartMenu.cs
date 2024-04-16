@@ -6,7 +6,7 @@ public class StartMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        //SceneManager.LoadScene("Cutscene");       //if i have time i will add a cutscene
+        //SceneManager.LoadScene("Cutscene");       //if i have time i will add a cutscene of the spaceship crashing
         SceneManager.LoadScene("Game");
     }
 

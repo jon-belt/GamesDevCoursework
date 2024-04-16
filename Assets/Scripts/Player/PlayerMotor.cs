@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class PlayerMotor : MonoBehaviour
+public class PlayerMotor : MonoBehaviour, IDataPersistence
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -24,6 +24,7 @@ public class PlayerMotor : MonoBehaviour
     bool crouching = false;
     float crouchTimer = 1;
     bool lerpCrouch = false;
+    private bool newGame = true;
     [SerializeField] bool sprinting = false;
 
     // Start is called before the first frame update
@@ -31,14 +32,19 @@ public class PlayerMotor : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerStamina = FindObjectOfType<PlayerStamina>();
-        stamina = playerStamina.maxStamina;
+        //stamina = playerStamina.maxStamina;       //NEW GAME
+
+        if (newGame == true)
+        {
+            stamina = 100f;
+            RegenRate = 0.5f;
+            newGame = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (!canMove) return;   //skips all code if the player can't move
-
         isGrounded = controller.isGrounded;
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         bool isMoving = input.sqrMagnitude > 0.01f;
@@ -172,5 +178,19 @@ public class PlayerMotor : MonoBehaviour
     public void IncreaseRegenRate(float num)
     {
         RegenRate += num;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.RegenRate = data.staminaRegenRate;
+        this.stamina = data.stamina;
+        this.newGame = data.staminaNewGame;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.staminaRegenRate = this.RegenRate;
+        data.stamina = this.stamina;
+        data.staminaNewGame = this.newGame;
     }
 }

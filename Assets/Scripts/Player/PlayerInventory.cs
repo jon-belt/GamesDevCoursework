@@ -61,10 +61,14 @@ public class PlayerInventory : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.balance = data.balance;
+        this.wood = data.wood;
+        this.ore = data.ore;
     }
 
     public void SaveData(ref GameData data)
     {
         data.balance = this.balance;
+        data.wood = this.wood;
+        data.ore = this.ore;
     }
 }

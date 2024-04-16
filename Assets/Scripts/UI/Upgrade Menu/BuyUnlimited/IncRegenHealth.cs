@@ -4,32 +4,27 @@ using UnityEngine;
 public class IncRegenHealth : ButtonBase
 {
     public PlayerHealth playerHealth;
-    protected int UpgradeCount = 0;
+    private int upgradeCount = 0;
 
     protected override int UpgradePriceInc => 5;
     protected override int BaseUpgradeCost => 15;
+    protected override int UpgradeCount => upgradeCount;
 
     protected override void ApplyUpgrade()
     {
         Debug.Log("Regen Rate Increased by 0.1");
         playerHealth.IncreaseRegenRate(0.1f);
 
-        UpgradeCount += 1;
-        CurrentUpgradeCost += UpgradePriceInc;
-        Debug.Log("Current Upgrade cost:" + CurrentUpgradeCost);
+        upgradeCount += 1;
     }
 
-    public override ButtonSaveData GetSaveData()
+    public void LoadData(GameData data)
     {
-        var baseData = base.GetSaveData();
-        baseData.upgradeCount = this.UpgradeCount;
-        UpdateButtonUI();
-        return baseData;
+        this.upgradeCount = data.healthRegenRateUpgradeCount;
     }
 
-    public override void SetSaveData(ButtonSaveData saveData)
+    public void SaveData(ref GameData data)
     {
-        base.SetSaveData(saveData);
-        this.UpgradeCount = saveData.upgradeCount;
-    }    
+        data.healthRegenRateUpgradeCount = this.upgradeCount;
+    }
 }

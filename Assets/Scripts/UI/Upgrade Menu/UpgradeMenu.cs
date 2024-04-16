@@ -11,6 +11,15 @@ public class UpgradeMenu : MonoBehaviour
 
     void Start()
     {
+        // Start the coroutine
+        StartCoroutine(HideAfterDelay());
+    }
+
+    //because of how i set up the upgrade menu, unfortunaely i have to use this weird workaround to disable the menu after a millisecond
+    //this is because the menu needs to be active in the scene for the save mechanic to work
+    private IEnumerator HideAfterDelay()
+    {
+        yield return new WaitForSeconds(0.001f);
         this.gameObject.SetActive(false);
     }
 
@@ -31,21 +40,5 @@ public class UpgradeMenu : MonoBehaviour
 
         playerMotor.canMove = false;
         playerLook.canLookAround = false;
-    }
-
-    private void OnEnable()
-    {
-        StartCoroutine(EnsureDataManagerReady());
-    }
-
-    private IEnumerator EnsureDataManagerReady()
-    {
-        while (DataPersistenceManager.instance == null)
-        {
-            Debug.Log("Waiting for DataPersistenceManager...");
-            yield return null;
-        }
-        
-        DataPersistenceManager.instance.ApplyDataWhenReady();
     }
 }
