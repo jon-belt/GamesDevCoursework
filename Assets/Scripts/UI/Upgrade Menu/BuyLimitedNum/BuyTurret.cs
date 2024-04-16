@@ -27,7 +27,6 @@ public class BuyTurret : MonoBehaviour
         else
         {
             buttonText.text = "Max Owned"; //max turrets bought
-            
         }
     }
 

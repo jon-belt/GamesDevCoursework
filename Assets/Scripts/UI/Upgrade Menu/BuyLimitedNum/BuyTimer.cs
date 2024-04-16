@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuyTimer : OneTimePurchaseButton
+public class BuyTimer : OneTimePurchaseButton, IDataPersistence
 {
     public TimerLogic timerLogic;
 
@@ -10,5 +10,16 @@ public class BuyTimer : OneTimePurchaseButton
     protected override void ApplyUpgrade()
     {
         timerLogic.Purchase();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.purchased = data.timer;
+        UpdateButtonUI();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.timer = this.purchased;
     }
 }

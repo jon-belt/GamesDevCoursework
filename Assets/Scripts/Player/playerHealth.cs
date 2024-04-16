@@ -136,8 +136,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         this.regenRate = data.healthRegenRate;
         this.health = data.health;
         this.newGame = data.healthNewGame;
-
-        print("Data loaded for player health");
     }
 
     public void SaveData(ref GameData data)
@@ -145,7 +143,5 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         data.healthRegenRate = this.regenRate;
         data.health = this.health;
         data.healthNewGame = this.newGame;
-
-        print("Data saved for player health");
     }
 }

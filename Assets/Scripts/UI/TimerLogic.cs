@@ -7,7 +7,7 @@ public class TimerLogic : MonoBehaviour
     public TimerCountdown timerCountdown;
     public LightingManager lightingManager;
 
-    public bool purchased;
+    public bool purchased = false;
     public bool toggleTimer;
 
     void Start()
@@ -54,7 +54,6 @@ public class TimerLogic : MonoBehaviour
 
     public void Purchase()
     {
-        Debug.Log("purchase went through");
         purchased = true;
     }
 }

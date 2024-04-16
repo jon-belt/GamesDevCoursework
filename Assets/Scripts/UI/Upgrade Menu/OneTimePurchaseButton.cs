@@ -40,6 +40,7 @@ public abstract class OneTimePurchaseButton : MonoBehaviour
             string objName = gameObject.name;
             objName = objName.Remove(0,4);
             upgradeMenuText.UpdateMessage($"{objName} already purchased...");
+            UpdateButtonUI();
         }
     }
 

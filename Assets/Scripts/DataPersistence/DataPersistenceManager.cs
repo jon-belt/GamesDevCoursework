@@ -72,7 +72,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
 
-        Debug.Log("Found " + dataPersistenceObjects.Count() + " IDataPersistence objects.");
+        //Debug.Log("Found " + dataPersistenceObjects.Count() + " IDataPersistence objects.");
 
         return new List<IDataPersistence>(dataPersistenceObjects);
     }

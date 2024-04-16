@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncAxeReward : ButtonBase
+public class IncAxeReward : ButtonBase, IDataPersistence
 {
     public Axe axe;
     private int upgradeCount = 0;
@@ -21,6 +21,7 @@ public class IncAxeReward : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.axeReward;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

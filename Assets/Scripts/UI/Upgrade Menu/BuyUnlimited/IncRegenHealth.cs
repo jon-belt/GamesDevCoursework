@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class IncRegenHealth : ButtonBase
+public class IncRegenHealth : ButtonBase, IDataPersistence
 {
     public PlayerHealth playerHealth;
     private int upgradeCount = 0;
@@ -21,6 +21,7 @@ public class IncRegenHealth : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.healthRegenRateUpgradeCount;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

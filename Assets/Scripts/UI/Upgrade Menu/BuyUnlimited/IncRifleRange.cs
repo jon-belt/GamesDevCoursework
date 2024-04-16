@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncRifleRange : ButtonBase
+public class IncRifleRange : ButtonBase, IDataPersistence
 {
     public Rifle rifle;
     private int upgradeCount = 0;
@@ -22,6 +22,8 @@ public class IncRifleRange : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.rifleRange;
+        
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

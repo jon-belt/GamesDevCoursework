@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class GameData
 {
-    //inventory - done
-    public float balance;
-    public float wood;
-    public float ore;
+    //inventory
+    public float balance; //
+    public float wood; //
+    public float ore; //
 
     //player statistics
     public float health; //
@@ -35,20 +35,25 @@ public class GameData
     public int rifleRange; //
 
     public int maxHealth; //
+    public int maxStamina; //
 
     //base statistics
-    public bool compass;
+    public bool compass; //
     public bool timer;
-    public bool turretUnlock;
-    public int turretNum;
-    public int turretFireRate;
-    public int turretRange;
-    public bool walls;
+    public bool floodLight; //
+    //public bool turretUnlock;
+    public int turretNum; //
+    public float turretFireRate; //
+    public float turretRange; //
+    public int turretFireRateUpgradeCount; //
+    public int turretRangeUpgradeCount; //
+    public bool walls; //
 
 
     //other
-    public float timeOfDay;
-    public float dayNum;
+    public float timeOfDay; //
+    public int dayNum; //
+    public bool lightingManagerNewGame; //
     public float shipHealth;
 
     //enemy position
@@ -65,6 +70,8 @@ public class GameData
         this.healthRegenRate = 0.2f;
         this.stamina = 100;
         this.staminaRegenRate = 0.5f;
+        //this.healthNewGame = true;
+        //this.staminaNewGame = true;
 
         this.healthRegenRateUpgradeCount = 0;
         this.staminaRegenRateUpgradeCount = 0;
@@ -78,14 +85,19 @@ public class GameData
 
         this.compass = false;
         this.timer = false;
-        this.turretUnlock = false;
+        this.floodLight = false;
+        //this.turretUnlock = false;
         this.turretNum = 0;
         this.walls = false;
-        this.turretFireRate = 15;
-        this.turretRange = 1;
+        this.turretFireRate = 1;
+        this.turretRange = 15;
 
-        this.timeOfDay = 7;
+        this.turretFireRateUpgradeCount = 1;
+        this.turretRangeUpgradeCount = 1;
+
+        this.timeOfDay = 6.5f;
         this.dayNum = 1;
-        this.shipHealth = 0;
+        //this.lightingManagerNewGame = true;
+        this.shipHealth = 1000;
     }
 }

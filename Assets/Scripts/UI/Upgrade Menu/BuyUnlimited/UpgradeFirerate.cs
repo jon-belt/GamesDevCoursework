@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeFirerate : ButtonBase
+public class UpgradeFirerate : ButtonBase, IDataPersistence
 {
     public TurretManager turretManager;
     private int upgradeCount = 0;
     
     protected override int UpgradePriceInc => 25;
-    protected override int BaseUpgradeCost => 100;
+    protected override int BaseUpgradeCost => 75;
     protected override int UpgradeCount => upgradeCount;
 
     protected override void ApplyUpgrade()
@@ -30,11 +30,12 @@ public class UpgradeFirerate : ButtonBase
 
     public void LoadData(GameData data)
     {
-        this.upgradeCount = data.turretFireRate;
+        this.upgradeCount = data.turretFireRateUpgradeCount;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)
     {
-        data.turretFireRate = this.upgradeCount;
+        data.turretFireRateUpgradeCount = this.upgradeCount;
     }
 }

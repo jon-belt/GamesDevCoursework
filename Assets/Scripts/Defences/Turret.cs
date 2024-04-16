@@ -1,25 +1,26 @@
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, IDataPersistence
 {
     public Transform target;
     public Transform rotator;
     public GameObject bulletPrefab;
     public Transform firePoint;     //empty gameobject, this is where the bullet starts at
-    public float range;         //can be upgraded
-    public float fireRate;      //can be upgraded
+    public float range = 15;
+    public float fireRate = 1;
     public float damage;        //might be upgraded in the future?  otherwise useless
+    public int rangeUpgradeCount = 0;
+    public int fireRateUpgradeCount = 0;
 
     private float fireCountdown = 0f;
     
     void Start()
     {
-        //set variables on start
-        range = 15f;
-        fireRate = 1f;
-
         //invoke repeating allows the script to be ran at an appropriate speed rather than every frame
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+
+        range = 15;
+        fireRate = 1;
     }
 
     void UpdateTarget()
@@ -105,5 +106,20 @@ public class Turret : MonoBehaviour
     public void increaseFirerate()
     {
         fireRate += 1;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.rangeUpgradeCount = data.turretRangeUpgradeCount;
+        this.fireRateUpgradeCount = data.turretFireRateUpgradeCount;
+
+        range = 15*rangeUpgradeCount;
+        fireRate = 1*fireRateUpgradeCount;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.turretRangeUpgradeCount = this.rangeUpgradeCount;
+        data.turretFireRateUpgradeCount = this.fireRateUpgradeCount;
     }
 }

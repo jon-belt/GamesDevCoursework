@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncAxeSpeed : ButtonBase
+public class IncAxeSpeed : ButtonBase, IDataPersistence
 {
     public Axe axe;
     private int upgradeCount = 0;
@@ -22,6 +22,7 @@ public class IncAxeSpeed : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.axeSpeed;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

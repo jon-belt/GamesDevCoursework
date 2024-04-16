@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncRegenStamina : ButtonBase
+public class IncRegenStamina : ButtonBase, IDataPersistence
 {
     public PlayerMotor playerStamina;
     private int upgradeCount = 0;
@@ -20,6 +20,7 @@ public class IncRegenStamina : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.staminaRegenRateUpgradeCount;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

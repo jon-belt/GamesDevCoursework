@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuyCompass : OneTimePurchaseButton
+public class BuyCompass : OneTimePurchaseButton, IDataPersistence
 {
     public CompassTrack compass;
     public HotbarManager hotbarManager;
@@ -10,6 +10,18 @@ public class BuyCompass : OneTimePurchaseButton
 
     protected override void ApplyUpgrade()
     {
+        purchased = true;
         hotbarManager.PurchaseCompass();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.purchased = data.compass;
+        UpdateButtonUI();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.compass = this.purchased;
     }
 }

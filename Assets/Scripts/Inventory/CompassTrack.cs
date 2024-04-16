@@ -5,12 +5,7 @@ using UnityEngine;
 public class CompassTrack : MonoBehaviour
 {
     public GameObject needle;
-    public bool purchased;
-
-    void Start()
-    {
-        purchased = false;
-    }
+    public bool purchased = false;
 
     void Update()
     {

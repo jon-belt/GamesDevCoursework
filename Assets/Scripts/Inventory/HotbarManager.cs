@@ -2,18 +2,13 @@
 
 using UnityEngine;
 
-public class HotbarManager : MonoBehaviour
+public class HotbarManager : MonoBehaviour, IDataPersistence
 {
     public GameObject[] items;  //list of holdable items
     private int currentIndex = -1;
 
     //these two bools ensure the user cannot bring out item they have not purchased yet
-    private bool compassPurchased;
-
-    void Start()
-    {
-        compassPurchased = false;
-    }
+    private bool compassPurchased = false;
 
     void Update()
     {
@@ -50,5 +45,15 @@ public class HotbarManager : MonoBehaviour
     public void PurchaseCompass()
     {
         compassPurchased = true;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.compassPurchased = data.compass;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.compass = this.compassPurchased;
     }
 }

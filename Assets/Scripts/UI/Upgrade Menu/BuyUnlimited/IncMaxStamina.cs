@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncMaxStamina : ButtonBase
+public class IncMaxStamina : ButtonBase, IDataPersistence
 {
     public PlayerMotor playerStamina;
     private int upgradeCount = 0;
@@ -17,4 +17,14 @@ public class IncMaxStamina : ButtonBase
         upgradeCount += 1;
     }
 
+    public void LoadData(GameData data)
+    {
+        this.upgradeCount = data.maxStamina;
+        UpdateButtonUI();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.maxStamina = this.upgradeCount;
+    }
 }

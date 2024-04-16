@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncPickaxeSpeed : ButtonBase
+public class IncPickaxeSpeed : ButtonBase, IDataPersistence
 {
     public Pickaxe pickaxe;
     private int upgradeCount = 0;
@@ -22,6 +22,7 @@ public class IncPickaxeSpeed : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.pickaxeSpeed;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

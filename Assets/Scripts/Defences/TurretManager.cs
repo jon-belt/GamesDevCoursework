@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class TurretManager : MonoBehaviour
+public class TurretManager : MonoBehaviour, IDataPersistence
 {
     public GameObject[] turrets;    //array of turrets, max 5
     public int turretsBought = 0;  //track current turret
 
     public void Start()
     {
-        //ensures all turrets are hidden at the start of the game
+        //sets all to be hidden
         foreach (GameObject turret in turrets)
         {
             turret.SetActive(false);
+        }
+
+        int numTurretsToActivate = Mathf.Min(turretsBought, turrets.Length);
+        for (int i = 0; i < numTurretsToActivate; i++)
+        {
+            turrets[i].SetActive(true);
         }
     }
 
@@ -27,5 +33,15 @@ public class TurretManager : MonoBehaviour
             Debug.Log("All turrets have been bought.");
             //tell upgrade menu to change button + then disable button
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.turretsBought = data.turretNum;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.turretNum = this.turretsBought;
     }
 }

@@ -2531,6 +2531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walls: {fileID: 212971863}
+  buyWalls: {fileID: 1853999193}
 --- !u!4 &235147822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8574026618666305842, guid: e0652b12bdaca86419d91abcd311ea96, type: 3}
@@ -3193,6 +3194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floodLight: {fileID: 311631068}
+  buyFloodlight: {fileID: 1702269942}
 --- !u!65 &311631070
 BoxCollider:
   m_ObjectHideFlags: 0

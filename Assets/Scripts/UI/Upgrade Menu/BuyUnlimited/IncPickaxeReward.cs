@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncPickaxeReward : ButtonBase
+public class IncPickaxeReward : ButtonBase, IDataPersistence
 {
     public Pickaxe pickaxe;
     private int upgradeCount = 0;
@@ -21,6 +21,7 @@ public class IncPickaxeReward : ButtonBase
     public void LoadData(GameData data)
     {
         this.upgradeCount = data.pickaxeReward;
+        UpdateButtonUI();
     }
 
     public void SaveData(ref GameData data)

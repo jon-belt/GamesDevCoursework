@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Purchasing;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 [ExecuteAlways]
-public class LightingManager : MonoBehaviour
+public class LightingManager : MonoBehaviour, IDataPersistence
 {
     //references 
     [SerializeField] private Light DirectionalLight;
@@ -17,12 +19,16 @@ public class LightingManager : MonoBehaviour
                                                         //every real world 12 mins should be an in game 24 hours
     private float lastLogTime = -1;
     private bool dayPassed = false;
+    private bool newGame = true;
 
     void Start()
     {
-        //game starts at '6:30 am'
-        TimeOfDay = 6.5f ;
-        DayCount = 1;
+        if (newGame == true)
+        {
+            TimeOfDay = 6.5f ;
+            DayCount = 1;
+            newGame = false;
+        }
         
         UpdateLighting(TimeOfDay / 24f);
     }
@@ -104,14 +110,14 @@ public class LightingManager : MonoBehaviour
 
     private void CheckDay()
     {
-        // Increment day count just after enemies stop spawning
-        if (TimeOfDay >= 6.0 && TimeOfDay < 6.2 && !dayPassed) // Assuming TimeOfDay resets to 0 at midnight
+        //increment day count just after enemies stop spawning
+        if (TimeOfDay >= 6.0 && TimeOfDay < 6.2 && !dayPassed)
         {
             DayCount++;
-            dayPassed = true; // Mark that the day has been counted
+            dayPassed = true;
             Debug.Log("Starting Day: " + DayCount);
         }
-        else if (TimeOfDay >= 6.2) // Ensure dayPassed is reset after TimeOfDay has sufficiently advanced
+        else if (TimeOfDay >= 6.2) //ensure dayPassed is reset after TimeOfDay has sufficiently advanced
         {
             dayPassed = false;
         }
@@ -125,5 +131,19 @@ public class LightingManager : MonoBehaviour
     public float GetDayCount()
     {
         return DayCount;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.TimeOfDay = data.timeOfDay;
+        this.DayCount = data.dayNum;
+        this.newGame = data.lightingManagerNewGame;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.timeOfDay = this.TimeOfDay;
+        data.dayNum = this.DayCount;
+        data.lightingManagerNewGame = this.newGame;
     }
 }
