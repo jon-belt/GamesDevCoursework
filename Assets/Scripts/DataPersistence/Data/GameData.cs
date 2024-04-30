@@ -16,6 +16,7 @@ public class GameData
     public float healthRegenRate; //
     public float stamina; //
     public float staminaRegenRate; //
+    public bool playerPosNewGame; 
 
     public int healthRegenRateUpgradeCount;  //
     public int staminaRegenRateUpgradeCount;
@@ -23,8 +24,7 @@ public class GameData
     public bool healthNewGame;  //
     public bool staminaNewGame; //
 
-    public Vector3 playerPosition;
-    //public UnityEngine.Vector3 playerPosition;
+    //public Vector3 playerPosition;
     public int enemyNum; //
     public string[] enemyPositions; //
 
@@ -69,6 +69,7 @@ public class GameData
         this.healthRegenRate = 0.2f;
         this.stamina = 100;
         this.staminaRegenRate = 0.5f;
+        this.playerPosNewGame = true;
 
         this.healthRegenRateUpgradeCount = 0;
         this.staminaRegenRateUpgradeCount = 0;
