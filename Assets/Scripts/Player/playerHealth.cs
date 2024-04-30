@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Numerics;
+
 
 public class PlayerHealth : MonoBehaviour, IDataPersistence
 {
@@ -40,12 +42,13 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
-        // //initial check: is player alive?
-        // if (health <= 0)
-        // {
-        //     Debug.Log("Player is dead, GAME OVER...");
-        //     return;
-        // }
+        //initial check: is player alive?
+        if (health <= 0)
+        {
+            Debug.Log("Player is dead, GAME OVER...");
+            return;
+            //game over screen?
+        }
 
         //base regen rate
         if (health < maxHealth)

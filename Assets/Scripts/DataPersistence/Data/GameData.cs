@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Numerics;
 
 [System.Serializable]
+
+// i've used '//' to notate that the save system work for the variable on that line
 
 public class GameData
 {
@@ -23,7 +23,10 @@ public class GameData
     public bool healthNewGame;  //
     public bool staminaNewGame; //
 
-    //player position
+    public Vector3 playerPosition;
+    //public UnityEngine.Vector3 playerPosition;
+    public int enemyNum; //
+    public string[] enemyPositions; //
 
     //upgrade counts
     //tool statistics
@@ -41,7 +44,6 @@ public class GameData
     public bool compass; //
     public bool timer;
     public bool floodLight; //
-    //public bool turretUnlock;
     public int turretNum; //
     public float turretFireRate; //
     public float turretRange; //
@@ -49,19 +51,16 @@ public class GameData
     public int turretRangeUpgradeCount; //
     public bool walls; //
 
-
     //other
     public float timeOfDay; //
     public int dayNum; //
     public bool lightingManagerNewGame; //
-    public float shipHealth;
+    public float shipHealth; //
+    public bool shipNewGame; //
 
-    //enemy position
-
-
+    //default values
     public GameData()
     {
-        //default values
         this.balance = 0;
         this.wood = 0;
         this.ore = 0;
@@ -70,8 +69,6 @@ public class GameData
         this.healthRegenRate = 0.2f;
         this.stamina = 100;
         this.staminaRegenRate = 0.5f;
-        //this.healthNewGame = true;
-        //this.staminaNewGame = true;
 
         this.healthRegenRateUpgradeCount = 0;
         this.staminaRegenRateUpgradeCount = 0;
@@ -86,7 +83,6 @@ public class GameData
         this.compass = false;
         this.timer = false;
         this.floodLight = false;
-        //this.turretUnlock = false;
         this.turretNum = 0;
         this.walls = false;
         this.turretFireRate = 1;
@@ -97,7 +93,10 @@ public class GameData
 
         this.timeOfDay = 6.5f;
         this.dayNum = 1;
-        //this.lightingManagerNewGame = true;
         this.shipHealth = 1000;
+        this.shipNewGame = true;
+
+        this.enemyNum = 0;
+        this.enemyPositions = new string[0];
     }
 }

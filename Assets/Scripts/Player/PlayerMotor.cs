@@ -8,7 +8,7 @@ public class PlayerMotor : MonoBehaviour, IDataPersistence
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private Vector3 lastPosition;
+    private Vector3 playerPosition;
     private PlayerStamina playerStamina;
     private bool isGrounded;
 
@@ -189,8 +189,22 @@ public class PlayerMotor : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        //get users position in vector 3
+        //saves vector3 as array of 3 values (x,y,z)
         data.staminaRegenRate = this.RegenRate;
         data.stamina = this.stamina;
         data.staminaNewGame = this.newGame;
+
+        //cant get the player position to save, will go back later if i have time
+
+        //data.playerPosition = this.transform.position;
+
+        
+        // Vector3 currentPosition = transform.position;
+        // data.playerPosition = new float[3] { currentPosition.x, currentPosition.y, currentPosition.z };
+
+        // data.staminaRegenRate = this.RegenRate;
+        // data.stamina = this.stamina;
+        // data.staminaNewGame = this.newGame;
     }
 }
