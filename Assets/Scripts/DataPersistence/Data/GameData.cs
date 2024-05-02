@@ -100,4 +100,6 @@ public class GameData
         this.enemyNum = 0;
         this.enemyPositions = new string[0];
     }
+
+    //i probably shouldve used 1 'new game' variable, but i dont think its worth changing in the interest of time
 }
