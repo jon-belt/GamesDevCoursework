@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.Purchasing;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
-
 [ExecuteAlways]
 public class LightingManager : MonoBehaviour, IDataPersistence
 {
@@ -17,7 +12,7 @@ public class LightingManager : MonoBehaviour, IDataPersistence
     [SerializeField] public int DayCount;
     [SerializeField] public float MinsPerDay = 12f;    //amount of real world mins to in game days
                                                         //every real world 12 mins should be an in game 24 hours
-    private float lastLogTime = -1;
+    //private float lastLogTime = -1;
     private bool dayPassed = false;
     private bool newGame = true;
 
@@ -52,14 +47,13 @@ public class LightingManager : MonoBehaviour, IDataPersistence
 
             UpdateLighting(TimeOfDay / 24f);
 
-
-            //used for debugging, could make the game laggy so worth removing for final iteration
-            float inGameMinutes = TimeOfDay * 60;
-            if ((int)(inGameMinutes / 30) > (int)(lastLogTime / 30))
-            {
-                //Debug.Log($"In-game Time: {TimeOfDay} hours");
-                lastLogTime = inGameMinutes;
-            }
+            // //used for debugging, could make the game laggy so worth removing for final iteration
+            // float inGameMinutes = TimeOfDay * 60;
+            // if ((int)(inGameMinutes / 30) > (int)(lastLogTime / 30))
+            // {
+            //     //Debug.Log($"In-game Time: {TimeOfDay} hours");
+            //     lastLogTime = inGameMinutes;
+            // }
         }
         else
         {
@@ -68,17 +62,23 @@ public class LightingManager : MonoBehaviour, IDataPersistence
     }
 
     private void UpdateLighting(float timePercent){
-        RenderSettings.ambientLight = Preset.AmbientColour.Evaluate(timePercent);
-        RenderSettings.fogColor = Preset.FogColour.Evaluate(timePercent);
-
         if(DirectionalLight != null)
         {
+            //changes ambient light and fog to equal the colour in the preset
+            RenderSettings.ambientLight = Preset.AmbientColour.Evaluate(timePercent);
+            RenderSettings.fogColor = Preset.FogColour.Evaluate(timePercent);
+
+
+            //changes main light source to equal the colour in the preset
             DirectionalLight.color = Preset.DirectionalColour.Evaluate(timePercent);
-            DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
+
+            //angles light in the sky to act as the sun by using quaternion to calculate the rotation
+            quaternion sunTransform = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
+            DirectionalLight.transform.localRotation = sunTransform;
         }
     }
 
-    //try to find a directional lighjt to use if we have not already set one
+    //try to find a directional light to use if we have not already set one
     private void OnValidate()
     {
         if (DirectionalLight != null)
@@ -111,6 +111,8 @@ public class LightingManager : MonoBehaviour, IDataPersistence
     private void CheckDay()
     {
         //increment day count just after enemies stop spawning
+        //"if timeOfDay == 6.1" cannot be used due to the nature of the float numbers
+        //this method is used in all scripts that check the time of day
         if (TimeOfDay >= 6.0 && TimeOfDay < 6.2 && !dayPassed)
         {
             DayCount++;
