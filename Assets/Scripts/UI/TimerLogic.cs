@@ -24,7 +24,7 @@ public class TimerLogic : MonoBehaviour
         if(purchased == true)
         {
             //triggers between 16.5 & 17.0, only once due to bool toggle
-            if(TimeOfDay >= 16.0 && TimeOfDay < 17.0 && toggleTimer == true)
+            if(TimeOfDay >= 16.5 && TimeOfDay < 17.0 && toggleTimer == true)
             {
                 toggleTimer = false;    //toggle off
 

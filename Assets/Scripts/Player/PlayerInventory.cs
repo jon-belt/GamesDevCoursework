@@ -8,13 +8,6 @@ public class PlayerInventory : MonoBehaviour, IDataPersistence
     [SerializeField]public float ore = 0f;
     [SerializeField]public float wood= 0f;
 
-    // void Start()
-    // {
-    //     balance = 0f;
-    //     ore = 0f;
-    //     wood = 0f;
-    // }
-
     //balance methods
     public float GetBalance()
     {

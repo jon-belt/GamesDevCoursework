@@ -199,7 +199,6 @@ public class PlayerMotor : MonoBehaviour, IDataPersistence
 
         //data.playerPosition = this.transform.position;
 
-        
         // Vector3 currentPosition = transform.position;
         // data.playerPosition = new float[3] { currentPosition.x, currentPosition.y, currentPosition.z };
 

@@ -18169,7 +18169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1333532328
 Transform:
   m_ObjectHideFlags: 0
@@ -22471,7 +22471,7 @@ MonoBehaviour:
   lightingManager: {fileID: 705507996}
   minSpawnRate: 2
   maxSpawnRate: 5
-  baseEnemiesPerNight: 25
+  baseEnemiesPerNight: 0
 --- !u!1001 &1752333877
 PrefabInstance:
   m_ObjectHideFlags: 0
