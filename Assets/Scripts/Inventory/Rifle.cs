@@ -8,6 +8,8 @@ public class Rifle : MonoBehaviour
     public Camera cam;
     public ParticleSystem muzzleFlash;
 
+    private Animator animator;
+    void Start(){animator = GetComponent<Animator>();}
     void Update()
     {
         if(this.gameObject.activeSelf)  //only runs if gun has been picked up
@@ -23,6 +25,7 @@ public class Rifle : MonoBehaviour
     {
         //muzzleflash only plays once, but for some reason it plays on item switch
         muzzleFlash.Play();
+        animator.SetTrigger("Shoot");
         
         RaycastHit hit;
 
